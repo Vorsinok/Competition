@@ -252,7 +252,11 @@ const waitForImages = () => {
 				}
 			});
 		});
-	}, 100);
+	}, 20000);
+	//how to wait some amount of time in start of func 
+	// setTimeout(() => {
+	// 	init();
+	// }, 2000);
 };
 
 waitForImages();

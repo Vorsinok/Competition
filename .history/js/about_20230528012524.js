@@ -78,44 +78,44 @@ function changeInfo(direction) {
 
 	gsap.timeline()
 		.to([buttons.prev, buttons.next], {
-			duration: 0.2,
-			opacity: 0.5,
-			pointerEvents: "none",
-		})
+		duration: 0.2,
+		opacity: 0.5,
+		pointerEvents: "none",
+	})
 		.to(
-			currentInfoEl.querySelectorAll(".text"),
-			{
-				duration: 0.4,
-				stagger: 0.1,
-				translateY: "-120px",
-				opacity: 0,
-			},
-			"-="
-		)
+		currentInfoEl.querySelectorAll(".text"),
+		{
+			duration: 0.4,
+			stagger: 0.1,
+			translateY: "-120px",
+			opacity: 0,
+		},
+		"-="
+	)
 		.call(() => {
-			swapInfosClass(direction);
-		})
+		swapInfosClass(direction);
+	})
 		.call(() => initCardEvents())
 		.fromTo(
-			direction === "right"
-				? nextInfoEl.querySelectorAll(".text")
-				: previousInfoEl.querySelectorAll(".text"),
-			{
-				opacity: 0,
-				translateY: "40px",
-			},
-			{
-				duration: 0.4,
-				stagger: 0.1,
-				translateY: "0px",
-				opacity: 1,
-			}
-		)
-		.to([buttons.prev, buttons.next], {
-			duration: 0.2,
+		direction === "right"
+		? nextInfoEl.querySelectorAll(".text")
+		: previousInfoEl.querySelectorAll(".text"),
+		{
+			opacity: 0,
+			translateY: "40px",
+		},
+		{
+			duration: 0.4,
+			stagger: 0.1,
+			translateY: "0px",
 			opacity: 1,
-			pointerEvents: "all",
-		});
+		}
+	)
+		.to([buttons.prev, buttons.next], {
+		duration: 0.2,
+		opacity: 1,
+		pointerEvents: "all",
+	});
 
 	function swapInfosClass() {
 		currentInfoEl.classList.remove("current--info");
@@ -191,25 +191,24 @@ function init() {
 		"--card-translateY-offset": "0%",
 	})
 		.to(cardInfosContainerEl.querySelector(".current--info").querySelectorAll(".text"), {
-			delay: 0.5,
-			duration: 0.4,
-			stagger: 0.1,
-			opacity: 1,
-			translateY: 0,
-		})
+		delay: 0.5,
+		duration: 0.4,
+		stagger: 0.1,
+		opacity: 1,
+		translateY: 0,
+	})
 		.to(
-			[buttons.prev, buttons.next],
-			{
-				duration: 0.4,
-				opacity: 1,
-				pointerEvents: "all",
-			},
-			"-=0.4"
-		);
+		[buttons.prev, buttons.next],
+		{
+			duration: 0.4,
+			opacity: 1,
+			pointerEvents: "all",
+		},
+		"-=0.4"
+	);
 }
 
 const waitForImages = () => {
-
 	const images = [...document.querySelectorAll("img")];
 	const totalImages = images.length;
 	let loadedImages = 0;
@@ -226,33 +225,32 @@ const waitForImages = () => {
 		pointerEvents: "none",
 		opacity: "0",
 	});
-	// wait 200ms before next line of code use native js
-	setTimeout(() => {
-		images.forEach((image) => {
-			imagesLoaded(image, (instance) => {
-				if (instance.isComplete) {
-					loadedImages++;
-					let loadProgress = loadedImages / totalImages;
 
-					gsap.to(loaderEl, {
-						duration: 1,
-						scaleX: loadProgress,
-						backgroundColor: `hsl(${loadProgress * 120}, 100%, 50%`,
-					});
+	images.forEach((image) => {
+		imagesLoaded(image, (instance) => {
+			if (instance.isComplete) {
+				loadedImages++;
+				let loadProgress = loadedImages / totalImages;
 
-					if (totalImages == loadedImages) {
-						gsap.timeline()
-							.to(".loading__wrapper", {
-								duration: 0.8,
-								opacity: 0,
-								pointerEvents: "none",
-							})
-							.call(() => init());
-					}
+				gsap.to(loaderEl, {
+					duration: 1,
+					scaleX: loadProgress,
+					backgroundColor: `hsl(${loadProgress * 120}, 100%, 50%`,
+				});
+
+				if (totalImages == loadedImages) {
+					gsap.timeline()
+						.to(".loading__wrapper", {
+						duration: 0.8,
+						opacity: 0,
+						pointerEvents: "none",
+					})
+						.call(() => init());
 				}
-			});
+			}
 		});
-	}, 100);
+	});
+	//how to 
 };
 
 waitForImages();
