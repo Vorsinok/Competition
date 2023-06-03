@@ -1,5 +1,16 @@
 const pageContainer = document.getElementById('pageContainer');
 
+// create jsobject for path in pattern /{category}/{product:productid} with productid as number and category as string where i have cattegoryes: "bottles", "clothes", "shoes" 
+
+const routes = {
+  "index.html": ['/'],
+
+  "product/productList.html": ['/bottles', '/clothes', '/shoes']
+};
+const animations = {
+  "index.html": {},
+  "product/productList.html": {},
+}
 function loadPage(url) {
   fetch(url)
     .then(response => response.text())
@@ -9,7 +20,7 @@ function loadPage(url) {
     })
     .catch(error => console.error(error));
 }
-// add routes array and test
+
 function animatePageTransition() {
   // Add your animation logic here
 }
