@@ -1,10 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+  }
+  
 html,body{
     height: 100%;
 }
 .page-product{
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
     height: 100vw;
 }
 .page-product .img-container{
@@ -20,7 +27,7 @@ html,body{
 }
 .page-product .img-container img{
     height: 600px;
-    width: 400px;
+    width: 420px;
 }
 .page-product .choice-buy .firm-logo {
     width: 100px;
@@ -35,4 +42,79 @@ html,body{
     justify-content: center;
     flex-direction: column;
     gap: 30px;
+}
+.page-product .container-button__buy button{
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    border: none;
+    color: #000;
+    z-index: 1;
+}
+.page-product .container-button__buy button::after{
+     position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.page-product .container-button__buy button::hover{
+    color: #000;
+}
+
+.page-product .container-button__buy button:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
+  .page-product .container-button__buy button:active {
+    top: 2px;
+  }
+  .page-product .second-block{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .page-product .second-block .img-wrapper{
+    height: 400px;
+    width: 300px;
+  }
+  .page-product .second-block .img-wrapper img{
+    width: 100%;
+    height: 100%;
+  }
+.size-box{
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.black {
+  background-color: black;
 }
