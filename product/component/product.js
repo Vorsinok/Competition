@@ -13,13 +13,13 @@ let products = [
         logo: 'https://cdn.aboutstatic.com/file/81a472c98d5d53370e2dc3b01adff254.jpg?quality=75&trim=1&height=550&width=550',
         price: '$43.90',
         sizeSelection: [
-           43,
-           50,
-           90,
-           60
+            43,
+            50,
+            90,
+            60
         ],
         shortInfo: "sdfsdfsdfdsf",
-        completeInfo: "dsfdsfsdfsdfsdfsdfsdfsdfsdf",
+        completeInfo: "Оплата картой в отделении, Оплата при получении товара, Картой онлайн, -5% скидки при оплате от 500 грн картой Mastercard Универсальная/Универсальная Gold от ПриватБанк, Google Pay, Безналичными для юридических лиц, Оплатить онлайн социальной картой Пакунок малюка, Безналичными для физических лиц, Mastercard, Visa, Оплатить онлайн картой ",
     }
 ]
 function init() {
@@ -29,8 +29,8 @@ function init() {
         <div class="first-block">
         <div class="img-container" id="slider">
             ${product.previewImgs.map((img) => {
-                return `<img src="${img}">`;
-            }).join('')
+            return `<img src="${img}">`;
+        }).join('')
             }
         </div>
         <div class="choice-buy">
@@ -42,8 +42,8 @@ function init() {
             </div>
             <div class="size-selection">
                 ${product.sizeSelection.map((txt) => {
-                return `<div class="size-box">${txt}</div>`
-                
+                return `<div class="size-box" onclick="changeColor(this)">${txt}</div>`
+
             }).join('')
             }
             </div>
@@ -69,48 +69,56 @@ function init() {
         content.insertAdjacentHTML('beforeend', item);
     });
 }
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     var slider = document.getElementById('slider');
     var images = slider.getElementsByTagName('img');
     var currentIndex = 0;
     var totalImages = images.length;
     var timer;
-  
+
     function showImage(index) {
-      for (var i = 0; i < totalImages; i++) {
-        images[i].style.display = 'none';
-      }
-      images[index].style.display = 'block';
+        for (var i = 0; i < totalImages; i++) {
+            images[i].style.display = 'none';
+        }
+        images[index].style.display = 'block';
     }
-  
+
     function nextImage() {
-      currentIndex++;
-      if (currentIndex >= totalImages) {
-        currentIndex = 0;
-      }
-      showImage(currentIndex);
+        currentIndex++;
+        if (currentIndex >= totalImages) {
+            currentIndex = 0;
+        }
+        showImage(currentIndex);
     }
-  
+
     function startSlider() {
-      timer = setInterval(nextImage, 1500);
+        timer = setInterval(nextImage, 1500);
     }
-  
+
     function pauseSlider() {
-      clearInterval(timer);
+        clearInterval(timer);
     }
-  
+
     function restartSlider() {
-      startSlider();
+        startSlider();
     }
-  
+
     showImage(currentIndex);
     startSlider();
-  
-    slider.addEventListener('mousedown', function() {
+
+    slider.addEventListener('mousedown', function () {
         pauseSlider();
     });
-    slider.addEventListener('mouseup', function() {
-      restartSlider();
+    slider.addEventListener('mouseup', function () {
+        restartSlider();
     });
-  });
+});
 
+function changeColor(element) {
+    const sizeBoxes = document.querySelectorAll('.size-box');
+    sizeBoxes.forEach((box) => {
+        box.classList.remove('active');
+    });
+
+    element.classList.add('active');
+}
