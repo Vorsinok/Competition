@@ -7,9 +7,6 @@ let products = [
             'https://cdn.aboutstatic.com/file/images/e47698a3bb3efe67bee078389bb368a8.jpg?quality=75&height=1067&width=800',
             'https://cdn.aboutstatic.com/file/images/ae0eede3ca8ede7c7e8b41973636552b.jpg?quality=75&height=1067&width=800',
         ],
-        contentImgs: [
-            'https://cdn.aboutstatic.com/file/images/ae0eede3ca8ede7c7e8b41973636552b.jpg?quality=75&height=1067&width=800',
-        ],
         logo: 'https://cdn.aboutstatic.com/file/81a472c98d5d53370e2dc3b01adff254.jpg?quality=75&trim=1&height=550&width=550',
         price: '$43.90',
         sizeSelection: [
@@ -27,12 +24,16 @@ function init() {
     products.forEach((product) => {
         let item = `
         <div class="first-block">
-        <div class="img-container" id="slider">
+        <div class="slidershow-container" id="slider">
             ${product.previewImgs.map((img) => {
-            return `<img src="${img}">`;
+            return `<div class="slides fade"><img src="${img}"></div>`;
         }).join('')
             }
+            <a class="prev" onclick="plusSlides(-1)">&#10094</a>
+            <a class="next" onclick="plusSlides(1)">&#10095</a>
         </div>
+        </div>
+        
         <div class="choice-buy">
             <div class="firm-logo">
                 <img src="${product.logo}">
@@ -59,60 +60,12 @@ function init() {
         <div class="info-container">
             ${product.completeInfo}
         </div>
-        <div class="img-wrapper">
-            ${product.contentImgs.map((img) => {
-                return `<img src="${img}">`;
-            }).join('')
-            }
-        </div>
     </div> `;
         content.insertAdjacentHTML('beforeend', item);
     });
 }
-window.addEventListener('DOMContentLoaded', function () {
-    var slider = document.getElementById('slider');
-    var images = slider.getElementsByTagName('img');
-    var currentIndex = 0;
-    var totalImages = images.length;
-    var timer;
 
-    function showImage(index) {
-        for (var i = 0; i < totalImages; i++) {
-            images[i].style.display = 'none';
-        }
-        images[index].style.display = 'block';
-    }
 
-    function nextImage() {
-        currentIndex++;
-        if (currentIndex >= totalImages) {
-            currentIndex = 0;
-        }
-        showImage(currentIndex);
-    }
-
-    function startSlider() {
-        timer = setInterval(nextImage, 1500);
-    }
-
-    function pauseSlider() {
-        clearInterval(timer);
-    }
-
-    function restartSlider() {
-        startSlider();
-    }
-
-    showImage(currentIndex);
-    startSlider();
-
-    slider.addEventListener('mousedown', function () {
-        pauseSlider();
-    });
-    slider.addEventListener('mouseup', function () {
-        restartSlider();
-    });
-});
 
 function changeColor(element) {
     const sizeBoxes = document.querySelectorAll('.size-box');
